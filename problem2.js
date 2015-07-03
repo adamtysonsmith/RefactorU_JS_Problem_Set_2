@@ -41,7 +41,9 @@ var letterCount = function(str) {
         
         // Loop through each letter in each key
         for (var i = 0; i < key.length; i++) {
+            
            var regexmatch = key.match(new RegExp(key[i], 'gi'));
+            
            if(regexmatch.length === 2) {
                duplicateLetterCount ++;
            }
@@ -52,11 +54,15 @@ var letterCount = function(str) {
     
     // Return the word with the largest count of duplicates, or return -1 if there are no dups
     mostDuplicates = Object.keys(hash).reduce(function(prev, next){
-        return hash[prev] > hash[next] ? prev : next;
+        var result = hash[prev] > hash[next] ? prev : next;
+        if (hash[result] === 0) {
+            return -1;
+        } else {
+            return hash[prev] > hash[next] ? prev : next;
+        }
     });
     
     console.log(mostDuplicates);
 }
 
-letterCount('This is the day');
-//console.log('Letter Count:', letterCount('onomatopoeia'));
+letterCount('This is the dayy');
